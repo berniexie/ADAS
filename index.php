@@ -11,7 +11,7 @@ session_start();
 $app = new \Slim\Slim();
 
 $app->get('/', function () use ($app, $twig) {	
-  echo "hello, world";
+  $template = $twig->loadTemplate('Homepage.phtml');
 });
 
 $app->run();
