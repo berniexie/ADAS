@@ -12,6 +12,7 @@ $app = new \Slim\Slim();
 
 $app->get('/', function () use ($app, $twig) {	
   $template = $twig->loadTemplate('Homepage.phtml');
+  $template->display(array());
 });
 
 $app->run();
