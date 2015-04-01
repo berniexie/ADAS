@@ -1,0 +1,62 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/Stylesheets/pageStyles.css">
+     <style>
+        a {
+            text-decoration: none;
+            color: #000000;
+        }
+        table, th, td {
+            padding: 0px;
+            text-align: left;
+            width: 2000px;
+        }
+/*        table#t01 td:nth-child(1) {
+            text-align: left;
+        }
+        table#t01 th:nth-child(1) {
+            text-align: left;
+        }*/
+    </style>
+</head>
+<body bgcolor="#A4A4A4">
+    <div class="wrapper">
+        <div id="paperHeader">
+            <h1><a href="http://localhost:3000/">{{ title }}</a></h1>
+            <h2>"{{ searchword }}"</h2> 
+        </div>
+
+        <div id = "paperTitles">
+                <table id="t01" rules="rows">
+                    <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Journal</th>
+                    <th>Frequency</th>      
+                    </tr>
+                    {% for paper in papers %}
+                        <tr>
+                        <td>
+                        <a href= {{ paper.link }} target="_blank">{{ paper.title }}</a>
+                        </td>
+                        <td> {{ paper.author }} </td>
+                        <td> {{ paper.journal }} </td>
+                        <td> {{ paper.frequency }} </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+        </div>
+       <div class="push"></div>
+    </div>
+
+    <div class="footer">
+        <div>
+            <form method='get' action='/cloud/back'>
+                <input type="submit" class="buttons" value="Back">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
