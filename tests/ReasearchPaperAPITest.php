@@ -10,23 +10,33 @@ class paperTest extends PHPUnit_Framework_TestCase {
   //Tests getPapersByAuthor ensuring all papers returned are by a certain author
   public function testGetPapersByAuthor(){
     $author = "Jones";
-    $papers = $this->api->getPapersByAuthor($author);
+    $limit = 25;
+    $papers = $this->api->getPapersByAuthor($author, $limit);
     foreach ($papers as $p) {
-      $this->assertEquals($author, $p->getAuthor());
+      $contains_author = FALSE;
+      foreach ($p->getAuthor() as $a) {
+        if(strpos($a, $author) !== FALSE) {
+          $contains_author = TRUE;
+        }
+      }
+      $this->assertTrue($contains_author);
     }
   }
 
   //Tests that a non-empty set is returned when searching by keyword
   public function testGetPapersByKeywords(){
     $key_words = "computer science";
-    $papers = $this->api->getPapersByKeyWords($key_words);
+    $limit = "25";
+    $papers = $this->api->getPapersByKeyWords($key_words, $limit);
     $this->assertNotEmpty($papers);
+    $this->assertGreaterThanOrEqual($limit, count($papers));
   }
 
   //Tests that all papers are in the given journal
   public function testGetPapersByJournal() {
-    $journal = "Journal Name";
-    $papers = $this->api->getPapersByJournal($journal);
+    $journal = "Visualization and Computer Graphics, IEEE Transactions on";
+    $limit = 25;
+    $papers = $this->api->getPapersByJournal($journal, $limit);
     foreach ($papers as $p) {
       $this->assertEquals($journal, $p->getJournal());
     }
