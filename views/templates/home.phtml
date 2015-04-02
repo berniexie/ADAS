@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/Stylesheets/pageStyles.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="/vendor/progressbar/dataurl.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+    <script src="/vendor/progressbar/pace.min.js">
     {% block head %}{% endblock %}
     <style>
     a {
@@ -68,7 +70,7 @@
     </script>  
 </head>
 
-<body bgcolor="#A4A4A4">
+<body bgcolor= white>
 
     <div id="wordCloudHeader">
         <h1><a href="http://localhost:3000/">{{ title }}</a><h1>
@@ -77,15 +79,14 @@
     <div id="wordCloud"></div>
 
     <div id="paperSearch">
-    <div class="ui-widget">
-        <form method='get' action='/cloud/new'>
-            <input id="tags" name="search" placeholder="Search away...">
-            <br />
-            <input type="submit" class="buttons" value="Submit">
-            {% block search %}{% endblock %}
-        </form>
-        {% block addartist %}{% endblock %}
-    </div>
+      <div align:"center" class="ui-widget">
+          <form method='get' action='/cloud/new'>
+              <input id="tags" name="search" placeholder="Search away...">
+              <input type="submit" class="buttons" value="Submit">
+              {% block search %}{% endblock %}
+          </form>
+          {% block addartist %}{% endblock %}
+      </div>
     </div>
 
 </body>
