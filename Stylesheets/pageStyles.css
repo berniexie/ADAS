@@ -1,0 +1,103 @@
+html, body {
+    height: 100%;
+    font-family: Arial, Sans-Serif;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+a:visited {
+    color:#1C73BD;
+}
+
+.wrapper{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.footer, .push {
+    height: 4em;
+}
+
+.ui-widget {
+  align: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+form {
+  display: inline;
+}
+
+input {
+  display: inline;
+  padding: 5px;
+  margin: 10px;
+}
+
+/* Word Cloud page */
+#wordCloudHeader{
+    color: black;
+    text-align: center;
+    padding:5px;
+}
+#wordCloud{
+    margin: 0 auto;
+    background-color:white;
+    width:800px;
+    height: 600px;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#search {
+    float: left;
+}
+#buttons{
+    margin: 0 auto;
+    width: 500px;
+    clear: both;
+}
+
+#radioButtons {
+  padding-top: 10px;
+}
+
+#submit{
+    color: blue;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+/* paper List page */
+#paperHeader {
+    color: black;
+    text-align: left;
+    padding:5px;
+}
+#paperTitles {
+    margin: 0 auto;
+}
+#titles{
+    float:left;
+    width:300px;
+    text-align: center;
+}
+#frequency{
+    float:right;
+    width:300px;
+    text-align: center;
+}
+.buttons{
+    border: none;
+    background: #1C73BD;
+    color: black;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
