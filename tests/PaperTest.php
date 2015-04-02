@@ -5,7 +5,12 @@ class paperTest extends PHPUnit_Framework_TestCase {
   protected $paper;
   public function setUp() {
     //Paper must be initialized in this format
-    $this->paper = new Paper("Test Author", "Test Title", "Test Journal", array("Test", "Content"), "Test Link");
+    $this->paper = new Paper("Test ID", "Test Author", "Test Title", "Test Journal", array("Test", "Content"), "Test Link");
+  }
+
+  //Tests to check if the paper id matches up
+  public function testGetID(){
+    $this->assertEquals("Test ID", $this->paper->getId());
   }
 
   //Tests to check if the paper title matches up
