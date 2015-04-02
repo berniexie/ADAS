@@ -14,19 +14,14 @@ $app->get('/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('home.phtml');
 	$params = array('title' => 'Another Day Another Scholar');
 	$template->display($params);
-	$_SESSION['dataManager'] = new DataManager();
 });
 
-$app->get('/auto', function () use ($app, $twig) {
-	$tags = $app->request()->params('q');
-	$callback = $app->request()->params('callback');
-	$auto = $_SESSION['dataManager']->getAutofillSuggestions($tags);
-	echo $callback . '(' . json_encode($auto) . ');';
-});
-
-$app->get('/cloud/:type', function ($type) use ($app, $twig) {
+$app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 	$search = $app->request()->params('search');
-	if ($type == "new" || $type == "back") {
+	$type = $app->request()->params('type');
+	$limit = $app->request()->params('limit');
+	// cloud = data manger get cloud ( search, type )
+	if ($flow == "new" || $flow == "back") {
 		$template = $twig->loadTemplate('wordCloud.phtml');
 		$params = array(
 			'title' => "Another Day Another Scholar"
@@ -37,9 +32,11 @@ $app->get('/cloud/:type', function ($type) use ($app, $twig) {
 
 $app->get('/papers/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('paperList.phtml');
+	$term = $app->request()->params('term');
+	// papers = data manager get papers (term)
 	$params = array(
-		'title' => 'Another Day Another Scholar', 
-		'searchword' => 'deep',
+		'title' => "Another Day Another Scholar", 
+		'searchword' => $term,
 		'papers' => array(
 			array(
 			'title' => "Multi-column deep neural networks for image classification ",
@@ -57,6 +54,13 @@ $app->get('/papers/', function () use ($app, $twig) {
 		)
 		);
 	$template->display($params);
+});
+
+$app->get('/auto', function () use ($app, $twig) {
+	$tags = $app->request()->params('q');
+	$callback = $app->request()->params('callback');
+	$auto = $_SESSION['dataManager']->getAutofillSuggestions($tags);
+	echo $callback . '(' . json_encode($auto) . ');';
 });
 
 $app->run();
