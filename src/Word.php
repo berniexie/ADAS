@@ -15,6 +15,7 @@ class Word
 		// When created, it's the first time the word is encountered
 		$this->totalFrequency = $frequency;
 		$this->termFrequency[$paperId] = $frequency;
+
 	}
 
 	public function getTerm()
@@ -29,7 +30,7 @@ class Word
 
 	public function getTermFrequency()
 	{
-		arsort($termFrequency);
+		arsort($this->termFrequency);
 		return $this->termFrequency;
 	}
 
@@ -37,7 +38,7 @@ class Word
 	// Must appropriately increment frequencies
 	public function incrementFrequency($paperId, $frequency)
 	{
-		$this->frequency += $frequency;
+		$this->totalFrequency += $frequency;
 
 		// If the paper is already in the list, increment its frequency
 		if(array_key_exists($paperId, $this->termFrequency))
