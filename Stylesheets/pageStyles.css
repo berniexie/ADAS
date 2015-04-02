@@ -54,11 +54,8 @@ input {
     border-style: solid;
     border-width: 5px;
 }
-#paperSearch{
-  margin: auto 0;
-}
+
 #search {
-    width: 300px;
     float: left;
 }
 #buttons{
@@ -66,19 +63,13 @@ input {
     width: 500px;
     clear: both;
 }
+
+#radioButtons {
+  padding-top: 10px;
+}
+
 #submit{
     color: blue;
-    font-size: 15px;
-    padding: 5px 10px;
-}
-#addToCloud{
-    color: black;
-    font-size: 15px;
-    padding: 5px 10px;
-}
-#fbShare{
-    color: white;
-    background-color: royalblue;
     font-size: 15px;
     padding: 5px 10px;
 }

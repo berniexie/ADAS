@@ -23,9 +23,6 @@
      * html .ui-autocomplete {
         height: 100px;
     }
-    #tags {
-        width: 400px;
-    }
     </style>
     <script>
     $(function() {
@@ -81,6 +78,26 @@
     <div id="paperSearch">
       <div align:"center" class="ui-widget">
           <form method='get' action='/cloud/new'>
+              <div id="radioButtons">
+                Search by:
+                <input type='radio' name='type' value="keyword" checked>Keyword
+                <input type='radio' name='type' value="author"> Author
+              </div>
+              <div id="dropDownMenu">
+                Number of Papers:
+                <select>
+                  <option>10</option>
+                  <option>20</option>
+                  <option>30</option>
+                  <option>40</option>
+                  <option>50</option>
+                  <option>60</option>
+                  <option>70</option>
+                  <option>80</option>
+                  <option>90</option>
+                  <option>100</option>
+                </select>
+              </div>
               <input id="tags" name="search" placeholder="Search away...">
               <input type="submit" class="buttons" value="Submit">
               {% block search %}{% endblock %}
