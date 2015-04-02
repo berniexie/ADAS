@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    font-family: Arial, Sans-Serif;
 }
 ul {
     list-style-type: none;
@@ -7,18 +8,38 @@ ul {
     text-align: center;
     white-space: nowrap;
 }
-form {
-    display: inline-block;
+
+a:visited {
+    color:#1C73BD;
 }
+
 .wrapper{
     min-height: 100%;
     height: auto !important;
     height: 100%;
     margin: 0 auto -4em;
 }
+
 .footer, .push {
     height: 4em;
 }
+
+.ui-widget {
+  align: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+form {
+  display: inline;
+}
+
+input {
+  display: inline;
+  padding: 5px;
+  margin: 10px;
+}
+
 /* Word Cloud page */
 #wordCloudHeader{
     color: black;
@@ -30,13 +51,11 @@ form {
     background-color:white;
     width:800px;
     height: 600px;
+    border-style: solid;
+    border-width: 5px;
 }
-#paperSearch{
-    margin: 0 auto;
-    width: 400px;
-}
+
 #search {
-    width: 300px;
     float: left;
 }
 #buttons{
@@ -44,21 +63,13 @@ form {
     width: 500px;
     clear: both;
 }
+
+#radioButtons {
+  padding-top: 10px;
+}
+
 #submit{
-    background-color: purple;
-    color: black;
-    font-size: 15px;
-    padding: 5px 10px;
-}
-#addToCloud{
-    background-color: purple;
-    color: black;
-    font-size: 15px;
-    padding: 5px 10px;
-}
-#fbShare{
-    color: white;
-    background-color: royalblue;
+    color: blue;
     font-size: 15px;
     padding: 5px 10px;
 }
@@ -83,32 +94,10 @@ form {
     text-align: center;
 }
 .buttons{
-    background-color: purple;
+    border: none;
+    background: #1C73BD;
     color: black;
     font-size: 15px;
     padding: 5px 10px;
 }
 
-/* Lyrics page */
-#lyricsHeader {
-    color: black;
-    text-align: left;
-    padding:5px;
-}
-#lyrics{
-    float:left;
-    width:500px;
-    text-align: left;
-}
-#topaperList{
-    background-color: purple;
-    font-size: 15px;
-    color: black;
-    padding: 5px 10px;
-}
-#toWordCloud{
-    background-color: purple;
-    font-size: 15px;
-    color: black;
-    padding: 5px 10px;
-}
