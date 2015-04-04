@@ -1,6 +1,8 @@
 <?php
 require "vendor/autoload.php";
 
+include_once('./src/DataManager.php');
+
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('./views/templates');
 $twig = new Twig_Environment($loader, array(
@@ -14,12 +16,20 @@ $app->get('/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('home.phtml');
 	$params = array('title' => 'Another Day Another Scholar');
 	$template->display($params);
+	$_SESSION['dataManager'] = new DataManager();
 });
 
 $app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 	$search = $app->request()->params('search');
 	$type = $app->request()->params('type');
 	$limit = $app->request()->params('limit');
+	if ($type == 'author') {
+
+	} else if ($type = 'keyword') {
+
+	} else {
+		// should not get here
+	}
 	// cloud = data manger get cloud ( search, type )
 	if ($flow == "new" || $flow == "back") {
 		$template = $twig->loadTemplate('wordCloud.phtml');
