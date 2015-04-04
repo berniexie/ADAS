@@ -17,7 +17,7 @@ class DataManager
     $this->apiManager = new APIManager();
   }
 
-  //clears papers for next word cloud
+  //clears the array of paper objects for the next word cloud
   public function clearPapers()
   {
     $this->papers = null;
@@ -68,6 +68,7 @@ class DataManager
   //This function creates a cloud based on a key word
   public function getCloudByKeyWord(string $keyWord, int $limit){
       clearPapers();
+      //sets array of papers using info from API
       $this->papers = $this->apiManager->getPapersByKeyWords($keyWord, $limit);
       return createWordCloud();
   }
@@ -75,6 +76,7 @@ class DataManager
   //This function creates a cloud based on an author
   public function getCloudByAuthor(string $author, int $limit)  {
       clearPapers();
+      //sets array of papers using API
       $this->papers = $this->apiManager->getPapersByAuthor($author, $limit);
       return createWordCloud();
   }
@@ -82,7 +84,9 @@ class DataManager
 /*  NOT FOR SPRINT 1
   //This function creates a cloud based on a given subset of papers
   public function getCloudByPapers(array $paperSubset){
+       clearPapers();
 
+       return createWordCloud();
   }
 */
 
@@ -93,16 +97,17 @@ class DataManager
       return($a->getTotalFrequency() < $b->getTotalFrequency()) ? -1:1;
   }
 
+  //Generates the word cloud with the current array of word objects
   public function createWordCloud(){
       createPaperMap();
       createWordObjects();
 
       //sort by frequency
       uasort($words, "cmp");
-
-      //cuts off array at 250 elements
+      //cuts off array at [magic number] elements
       $cloudArray = $this->words;
       $cloudArray = array_slice($cloudArray, 0, 250);
+      //make cloud
       $this->cloud = new Cloud($cloudArray);
       return $this->cloud;
   }
