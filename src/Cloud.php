@@ -13,7 +13,7 @@ class Cloud
 		
 		foreach($this->wordObjectArray as $word)
 		{
-			$this->wordArray[$word->getTerm()] = array(
+			$this->wordArray[] = array(
 				'text' => $word->getTerm(),
 				'weight' => $word->getTotalFrequency(),
 				'link' => "/papers?term=" . $word->getTerm()
