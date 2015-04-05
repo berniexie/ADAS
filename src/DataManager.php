@@ -7,7 +7,7 @@ include_once('APIManager.php');
 class DataManager 
 {
 	private $words = array();	    //array of Word objects that will be passed back to the cloud
-	private $papers = array();      //array of paper objects used
+	private $papers = array();      //array of Paper objects used
     private $cloud;
     private $apiManager;
     private $paperIdMap = array();  //maps paperID (string) to paper objects
@@ -68,16 +68,20 @@ class DataManager
   //This function creates a cloud based on a key word
   public function getCloudByKeyWord(string $keyWord, int $limit){
       clearPapers();
+
       //sets array of papers using info from API
       $this->papers = $this->apiManager->getPapersByKeyWords($keyWord, $limit);
+
       return createWordCloud();
   }
 
   //This function creates a cloud based on an author
   public function getCloudByAuthor(string $author, int $limit)  {
       clearPapers();
+
       //sets array of papers using API
       $this->papers = $this->apiManager->getPapersByAuthor($author, $limit);
+
       return createWordCloud();
   }
 
@@ -94,6 +98,7 @@ class DataManager
       if($a->getTotalFrequency() == $b->getTotalFrequency()){
           return 0;
       }
+
       return($a->getTotalFrequency() < $b->getTotalFrequency()) ? -1:1;
   }
 
@@ -108,7 +113,7 @@ class DataManager
       $cloudArray = $this->words;
       $cloudArray = array_slice($cloudArray, 0, 250);
       //make cloud
-      $this->cloud = new Cloud($cloudArray);
+      $this->cloud = new Cloud($cloudArray, $paperIdMap);
       return $this->cloud;
   }
 
