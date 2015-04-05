@@ -15,8 +15,9 @@ class Cloud
 		{
 			$this->wordArray[] = array(
 				'text' => $word->getTerm(),
-				'weight' => $word->getTotalFrequency(),
-				'link' => "/papers?term=" . $word->getTerm()
+				'weight' => $word->getTotalFrequency()
+				//,
+				// 'link' => "/papers?term=" . $word->getTerm()
 			);
 		}
  	}

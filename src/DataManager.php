@@ -85,7 +85,7 @@ class DataManager
 
 	//This function creates a cloud based on an author
 	public function getCloudByAuthor($author, $limit)  {
-		clearPapers();
+		$this->clearPapers();
 
 		//sets array of papers using API
 		$this->papers = $this->apiManager->getPapersByAuthor($author, $limit);
