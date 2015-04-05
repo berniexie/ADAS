@@ -2,7 +2,7 @@
 include_once('Cloud.php');
 include_once('Paper.php');
 include_once('Word.php');
-include_once('APIManager.php');
+include_once('ResearchPaperAPI.php');
 
 class DataManager 
 {
@@ -14,7 +14,7 @@ class DataManager
 
   public function __construct()
   {
-    $this->apiManager = new APIManager();
+    $this->apiManager = new ResearchPaperAPI();
   }
 
   //clears the array of paper objects for the next word cloud
@@ -66,23 +66,23 @@ class DataManager
   }
 
   //This function creates a cloud based on a key word
-  public function getCloudByKeyWord(string $keyWord, int $limit){
-      clearPapers();
+  public function getCloudByKeyWord($keyWord, $limit){
+      $this->clearPapers();
 
       //sets array of papers using info from API
       $this->papers = $this->apiManager->getPapersByKeyWords($keyWord, $limit);
 
-      return createWordCloud();
+      return $this->createWordCloud();
   }
 
   //This function creates a cloud based on an author
-  public function getCloudByAuthor(string $author, int $limit)  {
+  public function getCloudByAuthor($author, $limit)  {
       clearPapers();
 
       //sets array of papers using API
       $this->papers = $this->apiManager->getPapersByAuthor($author, $limit);
 
-      return createWordCloud();
+      return $this->createWordCloud();
   }
 
 /*  NOT FOR SPRINT 1
@@ -104,8 +104,8 @@ class DataManager
 
   //Generates the word cloud with the current array of word objects
   public function createWordCloud(){
-      createPaperMap();
-      createWordObjects();
+      $this->createPaperMap();
+      $this->createWordObjects();
 
       //sort by frequency
       uasort($words, "cmp");

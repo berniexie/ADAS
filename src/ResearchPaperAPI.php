@@ -1,6 +1,6 @@
 <?php
 //ini_set('memory_limit', '-1');
-require __DIR__ . '/Paper.php';
+include_once('Paper.php');
 class ResearchPaperAPI
 {
 

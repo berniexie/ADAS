@@ -2,7 +2,7 @@
 require "vendor/autoload.php";
 
 include_once('./src/DataManager.php');
-
+require_once('./vendor/Twig/Autoloader.php');
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('./views/templates');
 $twig = new Twig_Environment($loader, array(
@@ -16,25 +16,26 @@ $app->get('/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('home.phtml');
 	$params = array('title' => 'Another Day Another Scholar');
 	$template->display($params);
-	$_SESSION['dataManager'] = new DataManager();
 });
 
 $app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 	$search = $app->request()->params('search');
 	$type = $app->request()->params('type');
 	$limit = $app->request()->params('limit');
+	$_SESSION['dataManager'] = new DataManager();
 	if ($type == 'author') {
-
+		$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByAuthor($search, $limit);
 	} else if ($type = 'keyword') {
-
+		$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByKeyWord($search, $limit);
 	} else {
 		// should not get here
 	}
-	// cloud = data manger get cloud ( search, type )
 	if ($flow == "new" || $flow == "back") {
+		$wordArray = $_SESSION['cloud']->getWordArray();
 		$template = $twig->loadTemplate('wordCloud.phtml');
 		$params = array(
-			'title' => "Another Day Another Scholar"
+			'title' => "Another Day Another Scholar",
+			'wordArray' => $wordArray
 		);
 	$template->display($params);
 	}
@@ -43,6 +44,8 @@ $app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 $app->get('/papers/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('paperList.phtml');
 	$term = $app->request()->params('term');
+	$wordObject = $_SESSION['cloud']->getWordObject($term);
+	
 	// papers = data manager get papers (term)
 	$params = array(
 		'title' => "Another Day Another Scholar", 
