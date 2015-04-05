@@ -73,7 +73,7 @@ class ResearchPaperAPI
             $content = array();
             foreach ($content_temp as $word) {
                 if (!in_array($word, $this->stop_words)) {
-                    $content[] = $word;
+                    $content[] = (string)$word; //cast to string
                 }
             }
             $content_temp = $content;
@@ -88,7 +88,7 @@ class ResearchPaperAPI
             }
             $link = $d->mdurl;
 
-            $p = new Paper($id, $authors, $title, $journal, $content, $link);
+            $p = new Paper((string)$id, $authors, (string)$title, (string)$journal, $content, (string)$link); //cast to string
             $papers[] = $p;
         }
         return $papers;
