@@ -17,7 +17,8 @@ else
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(
       app,
-      window_size: [1280, 1024]#,
+      window_size: [1280, 1024],
+      timeout: 90#,
       #debug:       true
     )
   end
@@ -29,15 +30,10 @@ Capybara.default_selector = :css
 World(RSpec::Matchers)
 
 # configure the base urls for frontend and backend here
-$audiobook_collection_manager_ui_base_url = 'http://localhost:8000/app/'
-$storra_rest_server_base_url              = 'http://localhost:1302/'
+$mezzolyrics_base_url              = 'http://localhost:3000/'
 
 def ui_url(path)
-  $audiobook_collection_manager_ui_base_url + path
-end
-
-def backend_url(path)
-  $storra_rest_server_base_url + path
+  $mezzolyrics_base_url + path
 end
 
 # file with database fixtures
