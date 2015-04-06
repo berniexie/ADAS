@@ -1,9 +1,11 @@
 #!/bin/bash
+
 for f in ./tests/* 
 do
-  echo  "\n"
+  echo -e "\n"
   echo  $f
-  echo  "\n"
+  echo -e  "\n"
 
   vendor/bin/phpunit $f
 done
+cucumber
