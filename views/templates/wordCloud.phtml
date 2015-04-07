@@ -1,11 +1,10 @@
 {% extends "home.phtml" %}
 
 {% block head %} 
-<link rel="stylesheet" type="text/css" href="/Stylesheets/jqcloud.css"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
 <script type="text/javascript" src="/jqcloud-1.0.4.js"></script>
 <script type="text/javascript">
-  var word_array = {{ wordArray | raw }};
+var word_array = {{ wordArray | raw }};
 
   $(function() {
     // When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
@@ -19,12 +18,4 @@
 {% endblock %}
 
 {% block addartist %}
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 {% endblock %}
