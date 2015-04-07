@@ -44,7 +44,7 @@ input {
 #wordCloudHeader{
     color: black;
     text-align: center;
-    padding:5px;
+    padding:20px;
 }
 #wordCloud{
     margin: 0 auto;
