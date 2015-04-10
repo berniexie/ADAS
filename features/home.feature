@@ -46,3 +46,13 @@ Scenario: Search with author 'Smith'
 	And I fill in "search" with "Smith"
 	And I click the Submit button
 	Then I should see "application"
+
+Scenario: Check for Paper List
+	Given I am on the homepage
+	When I fill in "search" with "artificial intelligence"
+	And I click the Submit button
+	And I click the word "intelligence"
+	Then I should see "Title"
+	And I should see "Author"
+	And I should see "Journal"
+	And I should see "Frequency"

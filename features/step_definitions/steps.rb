@@ -69,3 +69,8 @@ When(/^I fill in "(.*?)" with "(.*?)"$/) do |arg1, arg2|
 	fill_in arg1, with: arg2
 end
 
+#Clicks the word in the word cloud
+When(/^I click the word "(.*?)"$/) do |arg1|
+	find(arg1).click
+end
+
