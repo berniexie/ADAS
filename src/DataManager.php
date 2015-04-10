@@ -22,7 +22,7 @@ class DataManager
 			return 0;
 		}
 
-		return($a->getTotalFrequency() < $b->getTotalFrequency()) ? -1:1;
+		return($a->getTotalFrequency() < $b->getTotalFrequency()) ? 1:-1;
 	}
 
 	//clears the array of paper objects for the next word cloud
@@ -116,6 +116,7 @@ class DataManager
 
 		//make cloud
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
+
 		return $this->cloud;
 	}
 
