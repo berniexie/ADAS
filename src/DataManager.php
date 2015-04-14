@@ -22,7 +22,7 @@ class DataManager
 			return 0;
 		}
 
-		return($a->getTotalFrequency() < $b->getTotalFrequency()) ? -1:1;
+		return($a->getTotalFrequency() < $b->getTotalFrequency()) ? 1:-1;
 	}
 
 	//clears the array of paper objects for the next word cloud
@@ -80,6 +80,16 @@ class DataManager
 		//sets array of papers using info from API
 		$this->papers = $this->apiManager->getPapersByKeyWords($keyWord, $limit);
 
+		//set parsedTitle in all of the papers
+		foreach($this->papers as $paper)
+		{
+			$title = $paper->getTitle();
+
+			$parsedTitle = explode(" ", $title);
+
+			$paper->setParsedTitle($parsedTitle);
+		}
+
 		return $this->createWordCloud();
 	}
 
@@ -116,6 +126,7 @@ class DataManager
 
 		//make cloud
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
+
 		return $this->cloud;
 	}
 

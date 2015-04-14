@@ -6,6 +6,7 @@ class paperTest extends PHPUnit_Framework_TestCase {
   public function setUp() {
     //Paper must be initialized in this format
     $this->paper = new Paper("Test ID", "Test Author", "Test Title", "Test Journal", array("Test", "Content"), "Test Link");
+    $this->paper->setParsedTitle(array("TestTitle1", "TestTitle2", "TestTitle3"));
   }
 
   //Tests to check if the paper id matches up
@@ -38,4 +39,7 @@ class paperTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(array("Test", "Content"), $this->paper->getContent());
   }
 
+  public function testGetParsedTitle(){
+    $this->assertEquals(array("TestTitle1", "TestTitle2", "TestTitle3"), $this->paper->getParsedTitle());
+  }
 }
