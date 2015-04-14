@@ -2,12 +2,13 @@
 
 class Paper
 {
-	private $id;				// string
-	private $author = array(); 	// array of strings
-	private $title;				// string
-	private $journal;			// string
-	private $content;			// map: Word->(int)frequency
-	private $link;				// string
+	private $id;					// string
+	private $author = array();	 	// array of strings
+	private $title;					// string
+	private $journal;				// string
+	private $content;				// map: Word->(int)frequency
+	private $link;					// string
+	private $parsedTitle = array(); // array of strings
 
 	public function __construct($id, $author, $title, $journal, $content, $link)
 	{
@@ -47,6 +48,16 @@ class Paper
 	public function getLink()
 	{
 		return $this->link;
+	}
+
+	public function setParsedTitle($titleArray)
+	{
+		$this->parsedTitle = $titleArray;
+	}
+
+	public function getParsedTitle()
+	{
+		return $this->parsedTitle;
 	}
 }
 

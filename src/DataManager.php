@@ -80,6 +80,16 @@ class DataManager
 		//sets array of papers using info from API
 		$this->papers = $this->apiManager->getPapersByKeyWords($keyWord, $limit);
 
+		//set parsedTitle in all of the papers
+		foreach($this->papers as $paper)
+		{
+			$title = $paper->getTitle();
+
+			$parsedTitle = explode(" ", $title);
+
+			$paper->setParsedTitle($parsedTitle);
+		}
+
 		return $this->createWordCloud();
 	}
 
