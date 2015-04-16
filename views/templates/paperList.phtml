@@ -28,8 +28,15 @@
         </div>
 
         <div id = "paperTitles">
-                <table id="t01" rules="rows">
+                <table id="t01" rules="rows" witdh="100%">
+                    <col style="width:1%">
+                    <col style="width:15%">
+                    <col style="width:15%">
+                    <col style="width:15%">
+                    <col style="width:1%">
+                    <col style="width:1%">
                     <tr>
+                    <th></th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Journal</th>
@@ -38,6 +45,7 @@
                     </tr>
                     {% for paper in papers %}
                         <tr>
+                        <td><input type="checkbox" name="vehicle"></td>
                         <td>
                         {% for word in paper.title %}
                         <a href="/cloud/new?type=keyword&limit=10&search={{word}}">{{ word }} </a>
