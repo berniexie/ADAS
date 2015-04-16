@@ -38,8 +38,16 @@
                     </tr>
                     {% for paper in papers %}
                         <tr>
-                        <td> {{ paper.title }} </td>
-                        <td> {{ paper.author }} </td>
+                        <td>
+                        {% for word in paper.title %}
+                        <a href="/cloud/new?type=keyword&limit=10&search={{word}}">{{ word }} </a>
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for author in paper.author %}
+                        <a href="/cloud/new?type=author&limit=10&search={{author}}">{{ author }} </a>
+                        {% endfor %} 
+                        </td>
                         <td> {{ paper.journal }} </td>
                         <td>
                         <a href= {{ paper.link }} target="_blank"> X </a>
@@ -56,6 +64,9 @@
         <div>
             <form method='get' action='/cloud/back'>
                 <input type="submit" class="buttons" value="Back">
+            </form>
+            <form method='get' action='/pdf/{{searchword}}'>
+                <input type="submit" class="buttons" value="Export to PDF">
             </form>
         </div>
     </div>

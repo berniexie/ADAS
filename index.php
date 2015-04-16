@@ -1,6 +1,6 @@
 <?php
 require "vendor/autoload.php";
-
+require_once("./dompdf/dompdf_config.inc.php");
 include_once('./src/DataManager.php');
 require_once('./vendor/Twig/Autoloader.php');
 Twig_Autoloader::register();
@@ -37,44 +37,63 @@ $app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 			'title' => "Another Day Another Scholar",
 			'wordArray' => $wordArray
 		);
-	// echo $wordArray;
-	$template->display($params);
+	$template->display($params); 
 	}
 });
 
-// $app->get('/papers/', function () use ($app, $twig) {
-// 	$template = $twig->loadTemplate('paperList.phtml');
-// 	$term = $app->request()->params('term');
-// 	$wordObject = $_SESSION['cloud']->getWordObject($term);
-	
-// 	// papers = data manager get papers (term)
-// 	$params = array(
-// 		'title' => "Another Day Another Scholar", 
-// 		'searchword' => $term,
-// 		'papers' => array(
-// 			array(
-// 			'title' => "Multi-column deep neural networks for image classification ",
-// 			'author' => "Ciresan, D.",
-// 			'journal' => "IEEE",
-// 			'frequency' => 14,
-// 			'link' => "http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6248110&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6248110"
-// 			),
-// 			array(
-// 			'title' => "Leakage current mechanisms and leakage reduction techniques in deep-submicrometer CMOS circuits",
-// 			'author' => "Roy, K.",
-// 			'journal' => "IEEE",
-// 			'frequency' => 10,
-// 			'link' => "http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=1182065&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D1182065")
-// 		)
-// 		);
-// 	$template->display($params);
-// });
+$app->get('/papers/', function () use ($app, $twig) {
+	$template = $twig->loadTemplate('paperList.phtml');
+	$term = $app->request()->params('term');
+	$wordObject = $_SESSION['cloud']->getWordObject($term);
+	$ids = $wordObject->getTermFrequency();
+	$papers;
+	foreach($ids as $id => $freq) {
+		$paper = $_SESSION['cloud']->getPaperObject($id);
+		$papers[] = array(
+			'title' => $paper->getParsedTitle(),
+			'author' => $paper->getAuthor(),
+			'journal' => $paper->getJournal(),
+			'frequency' => $freq,
+			'link' => $paper->getLink()
+			);
+	}
 
-// $app->get('/auto', function () use ($app, $twig) {
-// 	$tags = $app->request()->params('q');
-// 	$callback = $app->request()->params('callback');
-// 	$auto = $_SESSION['dataManager']->getAutofillSuggestions($tags);
-// 	echo $callback . '(' . json_encode($auto) . ');';
-// });
+
+	$params = array(
+		'title' => "Another Day Another Scholar", 
+		'searchword' => $term,
+		'papers' => $papers
+		);
+	$template->display($params);
+});
+
+$app->get('/auto', function () use ($app, $twig) {
+	$tags = $app->request()->params('q');
+	$callback = $app->request()->params('callback');
+	$auto = (['Autofill','Suggestion','Test','USC']);
+	// $auto = $_SESSION['dataManager']->getAutofillSuggestions($tags);
+	echo $callback . '(' . json_encode($auto) . ');';
+});
+
+$app->get('/pdf/:term', function ($term) use ($app, $twig) {
+	$wordObject = $_SESSION['cloud']->getWordObject($term);
+	$ids = $wordObject->getTermFrequency();
+	$papers;
+
+	$file =
+  '<html><body>'.'<h1> "'.$term.'"</h1>';
+ 	foreach($ids as $id => $freq) {
+		$paper = $_SESSION['cloud']->getPaperObject($id);
+		$file = $file.implode(" ", $paper->getParsedTitle());
+		$file = $file.implode(" ", $paper->getAuthor());
+		$file = $file.$paper->getJournal()."<br><br>";
+	}
+  $file = $file.'</body></html>';
+
+	$dompdf = new DOMPDF();
+	$dompdf->load_html($file);
+	$dompdf->render();
+	$dompdf->stream("sample.pdf");
+});
 
 $app->run();
