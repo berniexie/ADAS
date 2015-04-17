@@ -31,7 +31,8 @@ class ResearchPaperAPI
 
     public function getPapersByAuthor($authorName, $limit = 10)
     {
-        $queryString = "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=" . $authorName . "&hc=" . $limit;
+        $qAuthor = preg_replace('/\s+/', "%20", $authorName);
+        $queryString = "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?au=" . $qAuthor . "&hc=" . $limit;
         return $this->getPapersByQuery($queryString);
         
     }
