@@ -75,20 +75,24 @@ $app->get('/auto', function () use ($app, $twig) {
 	echo $callback . '(' . json_encode($auto) . ');';
 });
 
-$app->get('/pdf/:term', function ($term) use ($app, $twig) {
+$app->get('/pdf/:term/:subset', function ($term, $subset) use ($app, $twig) {
 	$wordObject = $_SESSION['cloud']->getWordObject($term);
 	$ids = $wordObject->getTermFrequency();
 	$papers;
-
-	$file =
-  '<html><body>'.'<h1> "'.$term.'"</h1>';
+	$subset = substr($subset, 0, -1);
+	$checked = explode(",", $subset);
+	$file = '<html><body>'.'<h1> "'.$term.'"</h1>';
+	$counter = 2;
  	foreach($ids as $id => $freq) {
-		$paper = $_SESSION['cloud']->getPaperObject($id);
-		$file = $file.implode(" ", $paper->getParsedTitle());
-		$file = $file.implode(" ", $paper->getAuthor());
-		$file = $file.$paper->getJournal()."<br><br>";
+ 		if(in_array(strval($counter), $checked)) {
+ 			$paper = $_SESSION['cloud']->getPaperObject($id);
+			$file = $file.implode(" ", $paper->getParsedTitle());
+			$file = $file.implode(" ", $paper->getAuthor());
+			$file = $file.$paper->getJournal()."<br><br>";
+ 		}
+ 		$counter += 1;
 	}
-  $file = $file.'</body></html>';
+	$file = $file.'</body></html>';
 
 	$dompdf = new DOMPDF();
 	$dompdf->load_html($file);
