@@ -2,15 +2,15 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="/Stylesheets/pageStyles.css">
+    <script src = "./main.js"> </script>
      <style>
         a {
             text-decoration: none;
             color: #000000;
         }
         table, th, td {
-            padding: 0px;
+            padding: 5px;
             text-align: left;
-            width: 2000px;
         }
 /*        table#t01 td:nth-child(1) {
             text-align: left;
@@ -27,9 +27,26 @@
             <h2>"{{ searchword }}"</h2> 
         </div>
 
+        <div class="footer">
+            <div>
+                <form method='get' action='previous.html'>
+                    <input type="submit" class="buttons" value="Back" onClick="history.back();return false;" style="width: 8%">
+                </form>
+                <form id = "export" method='get' action='/pdf/{{searchword}}'>
+                    <input type="button" onclick= "exportFunc()" value="Export to PDF">
+                </form>
+            </div>
+        </div>
         <div id = "paperTitles">
-                <table id="t01" rules="rows">
+                <table id="t01" rules="rows" max-width=100%>
+                    <col style="width:1%">
+                    <col style="width:15%">
+                    <col style="width:10%">
+                    <col style="width:15%">
+                    <col style="width:1%">
+                    <col style="width:1%">
                     <tr>
+                    <th></th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Journal</th>
@@ -38,8 +55,17 @@
                     </tr>
                     {% for paper in papers %}
                         <tr>
-                        <td> {{ paper.title }} </td>
-                        <td> {{ paper.author }} </td>
+                        <td><input type="checkbox" name="papers"></td>
+                        <td>
+                        {% for word in paper.title %}
+                        <a href="/cloud/?type=keyword&limit=10&search={{word}}">{{ word }} </a>
+                        {% endfor %}
+                        </td>
+                        <td>
+                        {% for author in paper.author %}
+                        <a href="/cloud/?type=author&limit=10&search={{author}}">{{ author }} </a>
+                        {% endfor %} 
+                        </td>
                         <td> {{ paper.journal }} </td>
                         <td>
                         <a href= {{ paper.link }} target="_blank"> X </a>
@@ -51,14 +77,5 @@
         </div>
        <div class="push"></div>
     </div>
-
-    <div class="footer">
-        <div>
-            <form method='get' action='/cloud/back'>
-                <input type="submit" class="buttons" value="Back">
-            </form>
-        </div>
-    </div>
 </body>
-
 </html>

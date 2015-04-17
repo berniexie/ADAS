@@ -17,7 +17,7 @@ class DataManager
 		$this->apiManager = new ResearchPaperAPI();
 	}
 
-	public function cmp($a, $b){
+	public function cmp($a, $b) {
 		if($a->getTotalFrequency() == $b->getTotalFrequency()){
 			return 0;
 		}
@@ -99,6 +99,16 @@ class DataManager
 
 		//sets array of papers using API
 		$this->papers = $this->apiManager->getPapersByAuthor($author, $limit);
+
+		//set parsedTitle in all of the papers
+		foreach($this->papers as $paper)
+		{
+			$title = $paper->getTitle();
+
+			$parsedTitle = explode(" ", $title);
+
+			$paper->setParsedTitle($parsedTitle);
+		}
 
 		return $this->createWordCloud();
 	}

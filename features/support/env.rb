@@ -30,10 +30,10 @@ Capybara.default_selector = :css
 World(RSpec::Matchers)
 
 # configure the base urls for frontend and backend here
-$base_url              = 'http://localhost:3000/'
+$mezzolyrics_base_url              = 'http://localhost:3000/'
 
 def ui_url(path)
-  $base_url + path
+  $mezzolyrics_base_url + path
 end
 
 # file with database fixtures

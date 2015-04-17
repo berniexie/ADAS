@@ -10,14 +10,13 @@ class Cloud
  	{
  		$this->wordObjectArray = $cloud;
 		$this->paperIdMap = $IdMap;
-		
+
 		foreach($this->wordObjectArray as $word)
 		{
 			$this->wordArray[] = array(
 				'text' => $word->getTerm(),
-				'weight' => $word->getTotalFrequency()
-				//,
-				// 'link' => "/papers?term=" . $word->getTerm()
+				'weight' => $word->getTotalFrequency(),
+				'link' => "/papers?term=" . $word->getTerm()
 			);
 		}
  	}
@@ -28,13 +27,13 @@ class Cloud
 
 	public function getPaperObject($paperId){
 		//use paper ID to access paper object
-		return $this->$paperIdMap[$paperId];
+		return $this->paperIdMap[$paperId];
 	}
 
 	function getWordObject($word) {
 		for($i = 0; $i < count($this->wordObjectArray); $i++){
 			$wordObj = $this->wordObjectArray[$i];
-			if($wordObj->getString() == $word){
+			if($wordObj->getTerm() == $word){
 				return $wordObj;
 			}
 		}

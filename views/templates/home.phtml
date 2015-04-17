@@ -4,67 +4,62 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/Stylesheets/pageStyles.css">
     <link rel="stylesheet" type="text/css" href="/Stylesheets/jqcloud.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="/vendor/progressbar/dataurl.css">
+    <script src="/vendor/progressbar/pace.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    <script src="/vendor/progressbar/pace.min.js">
-    {% block head %}{% endblock %}
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    {% block head %}
+    {% endblock %}
     <style>
     a {
         text-decoration: none;
         color: #000000;
     }
-    ul.ui-autocomplete li.ui-menu-item{text-align:left;}
     .ui-autocomplete {
-        max-height: 100px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+      max-height: 100px;
+      overflow-y: scroll;
+      overflow-x: hidden;
     }
-     * html .ui-autocomplete {
-        height: 100px;
+   * html .ui-autocomplete {
+      height: 100px;
     }
+    #city { width: 25em; }
     </style>
     <script>
-    // $(function() {
-    // function log( message ) {
-    //     $( "<div>" ).text( message ).prependTo( "#log" );
-    //     $( "#log" ).scrollTop( 0 );
-    // }
-
-    // $( "#tags" ).autocomplete({
-    //     source: function( request, response ) {
-    //         $.ajax({
-    //             url: "/auto",
-    //             dataType: "jsonp",
-    //             data: {
-    //                 q: request.term
-    //             },
-    //         success: function( data ) {
-    //             response( data );
-    //         },
-    //         });
-    //     },
-    //     minLength: 3,
-    //     select: function( event, ui ) {
-    //         log( ui.item ?
-    //             "Selected: " + ui.item.label :
-    //             "Nothing selected, input was " + this.value);
-    //     },
-    //     open: function() {
-    //         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-    //     },
-    //     close: function() {
-    //         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-    //     }
-    //     })
-    //      .autocomplete( "instance" )._renderItem = function( ul, item ) {
-    //         debugger
-    //         return $( "<li>" )
-    //             .append('<img src="http://24.media.tumblr.com/721adde64a56d5845ebe7d02090ea10f/tumblr_mpnhcjxxpA1rzn60po1_500.png" style="width:25px;height:25px"><a>' + item.label + '</a>')
-    //             .appendTo( ul );
-    //     };
-    // });    
+  //   $(function() {
+  //   function log( message ) {
+  //     $( "<div>" ).text( message ).prependTo( "#log" );
+  //     $( "#log" ).scrollTop( 0 );
+  //   }
+ 
+  //   $( "#tags" ).autocomplete({
+  //     source: function( request, response ) {
+  //       $.ajax({
+  //         url: "/auto",
+  //         dataType: "jsonp",
+  //         data: {
+  //           q: request.term
+  //         },
+  //         success: function( data ) {
+  //           response( data );
+  //         }
+  //       });
+  //     },
+  //     minLength: 3,
+  //     select: function( event, ui ) {
+  //       log( ui.item ?
+  //         "Selected: " + ui.item.label :
+  //         "Nothing selected, input was " + this.value);
+  //     },
+  //     open: function() {
+  //       $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+  //     },
+  //     close: function() {
+  //       $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+  //     }
+  //   });
+  // });
    </script>  
 </head>
 
@@ -78,7 +73,7 @@
 
     <div id="paperSearch">
       <div align:"center" class="ui-widget">
-          <form method='get' action='/cloud/new'>
+          <form method='get' action='/cloud'>
               <div id="radioButtons">
                 Search by:
                 <input type='radio' name='type' value="keyword" checked>Keyword

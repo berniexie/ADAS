@@ -1,4 +1,5 @@
 html, body {
+    background: white;
     height: 100%;
     font-family: Arial, Sans-Serif;
 }
@@ -101,3 +102,14 @@ input {
     padding: 5px 10px;
 }
 
+a:visited {
+  color: black;
+}
+
+input[type = "button"]{
+  border: none;
+  background: #1C73BD;
+  color: black;
+  font-size: 15px;
+  padding: 5px 15px;
+}
