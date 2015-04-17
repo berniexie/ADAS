@@ -6,7 +6,7 @@ require_once('./vendor/Twig/Autoloader.php');
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('./views/templates');
 $twig = new Twig_Environment($loader, array(
-#    'cache' => './tmp/cache',  # turned off for development purposes
+   'cache' => './tmp/cache',  # turned off for development purposes
 ));
 session_cache_limiter(false);
 session_start();
@@ -18,7 +18,7 @@ $app->get('/', function () use ($app, $twig) {
 	$template->display($params);
 });
 
-$app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
+$app->get('/cloud/', function () use ($app, $twig) {
 	$search = $app->request()->params('search');
 	$type = $app->request()->params('type');
 	$limit = $app->request()->params('limit');
@@ -30,15 +30,15 @@ $app->get('/cloud/:flow', function ($flow) use ($app, $twig) {
 	} else {
 		// should not get here
 	}
-	if ($flow == "new" || $flow == "back") {
+	// if ($flow == "new") {
 		$wordArray = json_encode($_SESSION['cloud']->getWordArray());
-		$template = $twig->loadTemplate('wordCloud.phtml');
-		$params = array(
-			'title' => "Another Day Another Scholar",
-			'wordArray' => $wordArray
-		);
+	// }
+	$template = $twig->loadTemplate('wordCloud.phtml');
+	$params = array(
+		'title' => "Another Day Another Scholar",
+		'wordArray' => $wordArray
+	);
 	$template->display($params); 
-	}
 });
 
 $app->get('/papers/', function () use ($app, $twig) {
@@ -87,7 +87,7 @@ $app->get('/pdf/:term/:subset', function ($term, $subset) use ($app, $twig) {
  		if(in_array(strval($counter), $checked)) {
  			$paper = $_SESSION['cloud']->getPaperObject($id);
 			$file = $file.implode(" ", $paper->getParsedTitle());
-			$file = $file.implode(" ", $paper->getAuthor());
+			$file = $file."<br>".implode(" ", $paper->getAuthor())."<br>";
 			$file = $file.$paper->getJournal()."<br><br>";
  		}
  		$counter += 1;

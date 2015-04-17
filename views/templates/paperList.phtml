@@ -29,8 +29,8 @@
 
         <div class="footer">
             <div>
-                <form method='get' action='/cloud/back'>
-                    <input type="submit" class="buttons" value="Back" style="width: 8%">
+                <form method='get' action='previous.html'>
+                    <input type="submit" class="buttons" value="Back" onClick="history.back();return false;" style="width: 8%">
                 </form>
                 <form id = "export" method='get' action='/pdf/{{searchword}}'>
                     <input type="button" onclick= "exportFunc()" value="Export to PDF">
@@ -58,12 +58,12 @@
                         <td><input type="checkbox" name="papers"></td>
                         <td>
                         {% for word in paper.title %}
-                        <a href="/cloud/new?type=keyword&limit=10&search={{word}}">{{ word }} </a>
+                        <a href="/cloud/?type=keyword&limit=10&search={{word}}">{{ word }} </a>
                         {% endfor %}
                         </td>
                         <td>
                         {% for author in paper.author %}
-                        <a href="/cloud/new?type=author&limit=10&search={{author}}">{{ author }} </a>
+                        <a href="/cloud/?type=author&limit=10&search={{author}}">{{ author }} </a>
                         {% endfor %} 
                         </td>
                         <td> {{ paper.journal }} </td>
