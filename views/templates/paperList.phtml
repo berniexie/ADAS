@@ -2,6 +2,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="/Stylesheets/pageStyles.css">
+    <script src = "./main.js"> </script>
      <style>
         a {
             text-decoration: none;
@@ -31,8 +32,8 @@
                 <form method='get' action='/cloud/back'>
                     <input type="submit" class="buttons" value="Back" style="width: 8%">
                 </form>
-                <form method='get' action='/pdf/{{searchword}}'>
-                    <input type="submit" class="buttons" value="Export to PDF" style="width: 8%">
+                <form id = "export" method='get' action='/pdf/{{searchword}}'>
+                    <input type="button" onclick= "exportFunc()" value="Export to PDF" style="width: 8%">
                 </form>
             </div>
         </div>
@@ -54,7 +55,7 @@
                     </tr>
                     {% for paper in papers %}
                         <tr>
-                        <td><input type="checkbox" name="vehicle"></td>
+                        <td><input type="checkbox" name="papers"></td>
                         <td>
                         {% for word in paper.title %}
                         <a href="/cloud/new?type=keyword&limit=10&search={{word}}">{{ word }} </a>
