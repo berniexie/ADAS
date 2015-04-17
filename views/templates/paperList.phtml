@@ -8,9 +8,8 @@
             color: #000000;
         }
         table, th, td {
-            padding: 0px;
+            padding: 5px;
             text-align: left;
-            width: 2000px;
         }
 /*        table#t01 td:nth-child(1) {
             text-align: left;
@@ -27,9 +26,26 @@
             <h2>"{{ searchword }}"</h2> 
         </div>
 
+        <div class="footer">
+            <div>
+                <form method='get' action='/cloud/back'>
+                    <input type="submit" class="buttons" value="Back" style="width: 8%">
+                </form>
+                <form method='get' action='/pdf/{{searchword}}'>
+                    <input type="submit" class="buttons" value="Export to PDF" style="width: 8%">
+                </form>
+            </div>
+        </div>
         <div id = "paperTitles">
-                <table id="t01" rules="rows">
+                <table id="t01" rules="rows" max-width=100%>
+                    <col style="width:1%">
+                    <col style="width:15%">
+                    <col style="width:10%">
+                    <col style="width:15%">
+                    <col style="width:1%">
+                    <col style="width:1%">
                     <tr>
+                    <th></th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Journal</th>
@@ -38,6 +54,7 @@
                     </tr>
                     {% for paper in papers %}
                         <tr>
+                        <td><input type="checkbox" name="vehicle"></td>
                         <td>
                         {% for word in paper.title %}
                         <a href="/cloud/new?type=keyword&limit=10&search={{word}}">{{ word }} </a>
@@ -59,17 +76,5 @@
         </div>
        <div class="push"></div>
     </div>
-
-    <div class="footer">
-        <div>
-            <form method='get' action='/cloud/back'>
-                <input type="submit" class="buttons" value="Back">
-            </form>
-            <form method='get' action='/pdf/{{searchword}}'>
-                <input type="submit" class="buttons" value="Export to PDF">
-            </form>
-        </div>
-    </div>
 </body>
-
 </html>
