@@ -119,7 +119,6 @@ class DataManager
 
 		//sets array of papers using API
 		$journalPapers = $this->apiManager->getPapersByJournal($journal);
-
 		//set parsedTitle in all of the papers
 		foreach($journalPapers as $paper)
 		{

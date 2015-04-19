@@ -44,26 +44,38 @@ $app->get('/cloud/', function () use ($app, $twig) {
 $app->get('/papers/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('paperList.phtml');
 	$term = $app->request()->params('term');
-	$wordObject = $_SESSION['cloud']->getWordObject($term);
-	$ids = $wordObject->getTermFrequency();
-	$papers;
-	foreach($ids as $id => $freq) {
-		$paper = $_SESSION['cloud']->getPaperObject($id);
-		$papers[] = array(
+	if ($term[0] == "'") {
+		$papers = $_SESSION['dataManager']->getPapersByJournal($term);
+		foreach($papers as $paper) {
+			$journal[] = array(
 			'title' => $paper->getParsedTitle(),
 			'author' => $paper->getAuthor(),
 			'journal' => $paper->getJournal(),
-			'frequency' => $freq,
+			'frequency' => 0,
 			'link' => $paper->getLink()
-			);
+			);	
+		}
+	} else {
+		$wordObject = $_SESSION['cloud']->getWordObject($term);
+		$ids = $wordObject->getTermFrequency();
+		$papers;
+		foreach($ids as $id => $freq) {
+			$paper = $_SESSION['cloud']->getPaperObject($id);
+			$papers[] = array(
+				'title' => $paper->getParsedTitle(),
+				'author' => $paper->getAuthor(),
+				'journal' => $paper->getJournal(),
+				'frequency' => $freq,
+				'link' => $paper->getLink()
+				);
+		}
 	}
-
-
 	$params = array(
-		'title' => "Another Day Another Scholar", 
-		'searchword' => $term,
-		'papers' => $papers
-		);
+			'title' => "Another Day Another Scholar", 
+			'searchword' => $term,
+			'papers' => $papers
+			);
+
 	$template->display($params);
 });
 
