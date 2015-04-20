@@ -66,7 +66,9 @@
                         <a href="/cloud/?type=author&limit=10&search={{author}}">{{ author }} </a>
                         {% endfor %} 
                         </td>
-                        <td> {{ paper.journal }} </td>
+                        <td>
+                        <a href="/papers?term='{{ paper.journal }}'"> {{ paper.journal }}  </a>
+                        </td>
                         <td>
                         <a href= {{ paper.link }} target="_blank"> X </a>
                         </td>

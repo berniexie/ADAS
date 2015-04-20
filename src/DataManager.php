@@ -113,6 +113,25 @@ class DataManager
 		return $this->createWordCloud();
 	}
 
+	public function getPapersByJournal($journal)
+	{
+		$journalPapers = array();
+
+		//sets array of papers using API
+		$journalPapers = $this->apiManager->getPapersByJournal($journal);
+		//set parsedTitle in all of the papers
+		foreach($journalPapers as $paper)
+		{
+			$title = $paper->getTitle();
+
+			$parsedTitle = explode(" ", $title);
+
+			$paper->setParsedTitle($parsedTitle);
+		}
+
+		return $journalPapers;
+	}
+
 	/*  NOT FOR SPRINT 1
 	//This function creates a cloud based on a given subset of papers
 	public function getCloudByPapers(array $paperSubset){
