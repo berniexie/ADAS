@@ -25,10 +25,11 @@ class Cloud
 		return $this->wordArray;
 	}
 
-	public function getPaperObject($paperId){
-		//use paper ID to access paper object
-		return $this->paperIdMap[$paperId];
-	}
+    // This passes the corresponding paper object to the front end
+    public function getPaperObject($paperId){
+        //use paper ID to access paper object
+        return $this->$paperIdMap[$paperId];
+    }
 
 	function getWordObject($word) {
 		for($i = 0; $i < count($this->wordObjectArray); $i++){

@@ -166,12 +166,6 @@ class DataManager
 		}
 	}
 
-	// This passes the corresponding paper object to the front end
-	public function getPaperObject($paperId){
-		//use paper ID to access paper object
-		return $this->$paperIdMap[$paperId];
-	}
-
 }
 
 ?>
