@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="vendor/html2canvas.js"></script>
+    <script src = "./wordCloud.js"> </script>
     {% block head %}
     {% endblock %}
     <style>
@@ -96,6 +98,7 @@
               </div>
               <input type=text id="tags" name="search" placeholder="Search away..." required>
               <input type="submit" class="buttons" value="Submit">
+              <button type="button" class="buttons" id="printWordCloud">Print Word Cloud</button
               {% block search %}{% endblock %}
           </form>
           {% block addartist %}{% endblock %}
