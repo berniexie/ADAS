@@ -59,6 +59,7 @@ class ResearchPaperAPI
         foreach ($xml->document as $d) {
             $title = $d->title;
             $authors = $d->authors;
+            if($authors[0] == "") continue;
             $authors = explode(";", $authors);
             $journal = $d->pubtitle;
             $id = $d->publicationId;
