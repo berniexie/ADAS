@@ -5,7 +5,7 @@ window.onload = function() {
       onrendered: function(canvas) {
         var image = new Image();
         image.src = canvas.toDataURL("image/png");
-        window.location.href = image;
+        window.location.href = image.src;
       }
     });
   });
