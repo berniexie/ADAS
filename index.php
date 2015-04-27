@@ -53,8 +53,9 @@ $app->get('/papers/', function () use ($app, $twig) {
 			'journal' => $paper->getJournal(),
 			'frequency' => 0,
 			'link' => $paper->getLink()
-			);	
+			);
 		}
+		$papers = $journal;
 	} else {
 		$wordObject = $_SESSION['cloud']->getWordObject($term);
 		$ids = $wordObject->getTermFrequency();
