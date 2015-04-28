@@ -25,7 +25,8 @@ end
 
 #Checks that there is a combo box
 Then(/^I should see a combo box$/) do
-	page.should have_selector 'select[name=limit]'
+	#page.should have_selector 'select[name=limit]'
+	page.should have_selector 'input[type=number][id=limit][name=limit]'
 end
 
 #Checks that there is a submit button
@@ -46,7 +47,9 @@ end
 
 #Checks that the given value is the value of the combo box
 Then(/^I should see "(.*?)" as the combo box value$/) do |arg1|
-	expect(page).to have_select('limit', selected: arg1)
+	#expect(page).to have_select('limit', selected: arg1)
+	#expect(page).to have_selector("input[type=number][id=limit][name=limit][value='" + arg1 + "']")
+	expect(page).to have_field('limit', with: arg1)
 end
 
 #Chooses the value of the radio button
@@ -56,7 +59,8 @@ end
 
 #Chooses the value of the combo box
 When(/^I choose "(.*?)" as the combo box value$/) do |arg1|
-	select(arg1, :from => 'limit')
+	#select(arg1, :from => 'limit')
+	fill_in "limit", with: arg1
 end
 
 #Clicks the Submit button
