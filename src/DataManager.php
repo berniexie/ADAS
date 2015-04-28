@@ -11,10 +11,12 @@ class DataManager
 	private $cloud;
 	private $apiManager;
 	private $paperIdMap = array();  //maps paperID (string) to paper objects
+	private $cloudIdCounter; // counter to assign unique id's to clouds
 
 	public function __construct()
 	{
 		$this->apiManager = new ResearchPaperAPI();
+		$this->cloudIdCounter = 0;
 	}
 
 	public function cmp($a, $b) {
@@ -137,7 +139,7 @@ class DataManager
 		$cloudArray = array_slice($cloudArray, 0, 250);
 
 		//make cloud
-		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
+		$this->cloud = new Cloud($cloudArray, $this->paperIdMap, $this->cloudIdCounter++);
 
 		return $this->cloud;
 	}
