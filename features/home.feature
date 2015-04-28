@@ -56,3 +56,18 @@ Scenario: Check for Paper List
 	And I should see "Author"
 	And I should see "Journal"
 	And I should see "Frequency"
+
+Scenario: Check for history
+	Given I am on the homepage
+	And I fill in "search" with "artificial intelligence"
+	And I click the Submit button
+	Then I should see "History"
+
+Scenario: Check for history
+	Given I am on the homepage
+	And I fill in "search" with "artificial intelligence"
+	And I click the Submit button
+	And I fill in "search" with "deep"
+	And I click the Submit button
+	And I choose "artificial intelligence" as the history value
+	Then I should see "artificial intelligence"

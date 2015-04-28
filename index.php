@@ -30,9 +30,7 @@ $app->get('/cloud/', function () use ($app, $twig) {
 	} else {
 		// should not get here
 	}
-	// if ($flow == "new") {
-		$wordArray = json_encode($_SESSION['cloud']->getWordArray());
-	// }
+	$wordArray = json_encode($_SESSION['cloud']->getWordArray());
 	$template = $twig->loadTemplate('wordCloud.phtml');
 	$params = array(
 		'title' => "Another Day Another Scholar",
@@ -111,6 +109,30 @@ $app->get('/pdf/:term/:subset', function ($term, $subset) use ($app, $twig) {
 	$dompdf->load_html($file);
 	$dompdf->render();
 	$dompdf->stream("sample.pdf");
+});
+
+$app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) {
+	$subset = substr($subset, 0, -1);
+	$checked = explode(",", $subset);
+	$wordObject = $_SESSION['cloud']->getWordObject($term);
+	$ids = $wordObject->getTermFrequency();
+	$paperIds;
+	$counter = 2;
+	foreach($ids as $id) {
+		if(in_array(strval($counter), $checked)) {
+ 			$paperIds[] = $id;	
+ 		}
+ 		$counter += 1;
+	}
+	$_SESSION['cloud'] = $_SESSION['dataManager']->getSubsetCloud($paperIds);
+
+	$wordArray = json_encode($_SESSION['cloud']->getWordArray());
+	$template = $twig->loadTemplate('wordCloud.phtml');
+	$params = array(
+		'title' => "Another Day Another Scholar",
+		'wordArray' => $wordArray
+	);
+	$template->display($params); 
 });
 
 $app->run();

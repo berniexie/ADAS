@@ -11,6 +11,7 @@ class DataManager
 	private $cloud;
 	private $apiManager;
 	private $paperIdMap = array();  //maps paperID (string) to paper objects
+    private $cloudMap = array();    //maps cloudID to cloud objects
 
 	public function __construct()
 	{
@@ -30,14 +31,6 @@ class DataManager
 	{
 		$this->papers = null;
 	}
-
-	/*  TEMPORARILY UNIMPLEMENTED FOR SPRINT 1
-	public function getAutofillSuggestions($userInput)
-	{
-		// Passes autofill suggestions from apiManager
-		return $this->apiManager->getAuthorSuggestion($userInput);
-	}
-	*/
 
 	//This function is to count the frequency of the words in the papers and create the word objects
 	public function createWordObjects()
@@ -132,15 +125,6 @@ class DataManager
 		return $journalPapers;
 	}
 
-	/*  NOT FOR SPRINT 1
-	//This function creates a cloud based on a given subset of papers
-	public function getCloudByPapers(array $paperSubset){
-		clearPapers();
-
-		return createWordCloud();
-	}
-	*/
-
 	//Generates the word cloud with the current array of word objects
 	public function createWordCloud(){
 		$this->createPaperMap();
@@ -156,14 +140,35 @@ class DataManager
 		//make cloud
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
 
+        //maps cloud ID to cloud objects
+        $this->cloudMap[$this->cloud->getId()] = $this->cloud;
+
 		return $this->cloud;
 	}
 
 	//Creates paper map
 	public function createPaperMap(){
+		//Each time a new paper map is created; it is for a new cloud and should be reset
+		$this->paperIdMap = null;
+
 		foreach($this->papers as $object){
 			$this->paperIdMap[$object->getId()] = $object; //key = ID, value = paper object
 		}
+	}
+
+	public function getSubsetCloud($paperIds) //paperIds is an array of paperIds to make the cloud from
+	{
+		$newPapers = array();
+
+		// Find the paper objects from the current papers array and add it to newPapers
+		foreach($paperIds as $id)
+		{
+			$newPapers[] = $this->paperIdMap[$id];
+		}
+
+		$this->papers = $newPapers;
+
+		return $this->createWordCloud();
 	}
 
 }

@@ -74,3 +74,7 @@ When(/^I click the word "(.*?)"$/) do |arg1|
 	find(arg1).click
 end
 
+Given(/^I choose "(.*?)" as the history value$/) do |arg1|
+	find("input[type=radio][name=type][value=" + arg1 + "]").click
+end
+
