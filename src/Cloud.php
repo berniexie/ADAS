@@ -5,11 +5,13 @@ class Cloud
 	private $wordObjectArray = array();	//array of Word items used in the cloud
 	private $paperIdMap = array();		//maps paperID (string) to paper objects
 	private $wordArray = array();		//
+	private $id; // unique int id to identify cloud for history
 
- 	public function __construct($cloud, $IdMap)
+ 	public function __construct($cloud, $IdMap, $id)
  	{
  		$this->wordObjectArray = $cloud;
 		$this->paperIdMap = $IdMap;
+		$this->id = $id;
 
 		foreach($this->wordObjectArray as $word)
 		{
@@ -38,6 +40,10 @@ class Cloud
 				return $wordObj;
 			}
 		}
+	}
+
+	function getId() {
+		return $this->id;
 	}
          
 }
