@@ -11,6 +11,7 @@ class DataManager
 	private $cloud;
 	private $apiManager;
 	private $paperIdMap = array();  //maps paperID (string) to paper objects
+    private $cloudMap = array();    //maps cloudID to cloud objects
 
 	public function __construct()
 	{
@@ -138,6 +139,9 @@ class DataManager
 
 		//make cloud
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
+
+        //maps cloud ID to cloud objects
+        $this->cloudMap[$this->cloud->getId() = $this->cloud];
 
 		return $this->cloud;
 	}
