@@ -2,14 +2,19 @@
 
 class Cloud
 {
+	private static $maxID = 0;
 	private $wordObjectArray = array();	//array of Word items used in the cloud
 	private $paperIdMap = array();		//maps paperID (string) to paper objects
 	private $wordArray = array();		//
+	private $cloudID;
 
  	public function __construct($cloud, $IdMap)
  	{
  		$this->wordObjectArray = $cloud;
 		$this->paperIdMap = $IdMap;
+		$this->cloudID = self::$maxID;
+		self::$maxID = self::$maxID + 1;
+
 
 		foreach($this->wordObjectArray as $word)
 		{
@@ -38,6 +43,10 @@ class Cloud
 				return $wordObj;
 			}
 		}
+	}
+
+	public function getId() {
+		return $this->cloudID;
 	}
          
 }

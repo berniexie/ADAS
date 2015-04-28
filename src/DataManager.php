@@ -141,7 +141,7 @@ class DataManager
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
 
         //maps cloud ID to cloud objects
-        $this->cloudMap[$this->cloud->getId() = $this->cloud];
+        $this->cloudMap[$this->cloud->getId()] = $this->cloud;
 
 		return $this->cloud;
 	}
