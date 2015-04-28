@@ -97,7 +97,7 @@ input {
 .buttons{
     border: none;
     background: #1C73BD;
-    color: black;
+    color: white;
     font-size: 15px;
     padding: 5px 10px;
 }
@@ -109,7 +109,7 @@ a:visited {
 input[type = "button"]{
   border: none;
   background: #1C73BD;
-  color: black;
+  color: white;
   font-size: 15px;
   padding: 5px 15px;
 }
