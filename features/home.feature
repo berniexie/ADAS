@@ -45,7 +45,7 @@ Scenario: Search with author 'Smith'
 	When I choose "author" from the radio buttons
 	And I fill in "search" with "Smith"
 	And I click the Submit button
-	Then I should see "application"
+	Then I should see "polarization"
 
 Scenario: Check for Paper List
 	Given I am on the homepage
