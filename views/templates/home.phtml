@@ -61,6 +61,14 @@
               </div>
               <input type=text id="tags" name="search" placeholder="Search away..." required>
               <input type="submit" class="buttons" value="Submit">
+							<div id="historyMenu">
+                History:
+                <select name="history" onChange="window.location.href=this.value">
+                  <option value="www.google.com">deep</option>
+                  <option value="www.google.com">artificial intelligence</option>
+                  <option value="www.google.com">Halfond</option>
+                </select>
+              </div>
               {% block search %}{% endblock %}
           </form>
           {% block addartist %}{% endblock %}

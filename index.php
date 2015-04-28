@@ -134,4 +134,25 @@ $app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) 
 	$template->display($params); 
 });
 
+/*$app->get('/history', function () use ($app, $twig) {
+	$cloudid = $app->request()->params('cloudid');
+	$type = $app->request()->params('type');
+	$limit = $app->request()->params('limit');
+	$_SESSION['dataManager'] = new DataManager();
+	if ($type == 'author') {
+		$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByAuthor($search, $limit);
+	} else if ($type = 'keyword') {
+		$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByKeyWord($search, $limit);
+	} else {
+		// should not get here
+	}
+	$wordArray = json_encode($_SESSION['cloud']->getWordArray());
+	$template = $twig->loadTemplate('wordCloud.phtml');
+	$params = array(
+		'title' => "Another Day Another Scholar",
+		'wordArray' => $wordArray
+	);
+	$template->display($params); 
+});*/
+
 $app->run();
