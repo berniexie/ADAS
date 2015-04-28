@@ -67,6 +67,7 @@ Scenario: Check for history
 	Given I am on the homepage
 	And I fill in "search" with "artificial intelligence"
 	And I click the Submit button
-	And I fill in search with "deep"
+	And I fill in "search" with "deep"
+	And I click the Submit button
 	And I choose "artificial intelligence" as the history value
 	Then I should see "artificial intelligence"
