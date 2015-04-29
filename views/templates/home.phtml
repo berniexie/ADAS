@@ -52,6 +52,7 @@
               </div>
               <input type=text id="tags" name="search" placeholder="Search away..." required>
               <input type="submit" class="buttons" value="Submit">
+              <button type="button" class="buttons" id="printWordCloud">Print Word Cloud</button>
 							<div id="historyMenu">
                 <select name="history" onChange="window.location.href=this.value">
                   {% for term,id in history %}
@@ -59,7 +60,6 @@
                   {% endfor %}
                 </select>
               </div>
-              <button type="button" class="buttons" id="printWordCloud">Print Word Cloud</button
               {% block search %}{% endblock %}
           </form>
           {% block addartist %}{% endblock %}
