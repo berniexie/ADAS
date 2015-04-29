@@ -11,7 +11,6 @@ class DataManager
 	private $cloud;
 	private $apiManager;
 	private $paperIdMap = array();  //maps paperID (string) to paper objects
-	private $cloudIdCounter; // counter to assign unique id's to clouds
     private $cloudMap = array();    //maps cloudID to cloud objects
 	private $cloudCounter;			//int used to give ids to clouds
 
@@ -184,6 +183,7 @@ class DataManager
 
 	public function getCloud($id)
 	{
+		print_r($this->cloudMap);
 		return $this->cloudMap[$id];
 	}
 

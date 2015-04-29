@@ -127,20 +127,23 @@ $app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) 
 	$template = $twig->loadTemplate('wordCloud.phtml');
 	$params = array(
 		'title' => "Another Day Another Scholar",
-		'wordArray' => $wordArray
+		'wordArray' => $wordArray,
+		'history' => $_SESSION['history']
 	);
 	$template->display($params); 
 });
 
 $app->get('/history', function () use ($app, $twig) {
 	$cloudid = $app->request()->params('cloudid');
-	// need to get cloud based on cloudid
-	$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByAuthor($search, $limit);
+	$_SESSION['cloud'] = $_SESSION['dataManager']->getCloud($cloudid);
+	echo $_SESSION['cloud']->getId();
 	$wordArray = json_encode($_SESSION['cloud']->getWordArray());
+	// print_r($wordArray);
 	$template = $twig->loadTemplate('wordCloud.phtml');
 	$params = array(
 		'title' => "Another Day Another Scholar",
-		'wordArray' => $wordArray
+		'wordArray' => $wordArray,
+		'history' => $_SESSION['history']
 	);
 	$template->display($params); 
 });
