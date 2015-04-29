@@ -5,7 +5,12 @@ window.onload = function() {
       onrendered: function(canvas) {
         var image = new Image();
         image.src = canvas.toDataURL("image/png");
-        window.location.href = image.src;
+        //window.location.href = image.src;
+        var link = document.createElement('a');
+        link.href = image.src;
+        link.download = 'Download.jpg';
+        document.body.appendChild(link);
+        link.click();
       }
     });
   });
