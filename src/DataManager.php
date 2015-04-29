@@ -12,14 +12,19 @@ class DataManager
 	private $apiManager;
 	private $paperIdMap = array();  //maps paperID (string) to paper objects
     private $cloudMap = array();    //maps cloudID to cloud objects
+	private $cloudCounter;			//int used to give ids to clouds
 
 	public function __construct()
 	{
 		$this->apiManager = new ResearchPaperAPI();
+
+		$this->cloudCounter = 0;
 	}
 
-	public function cmp($a, $b) {
-		if($a->getTotalFrequency() == $b->getTotalFrequency()){
+	public function cmp($a, $b)
+	{
+		if($a->getTotalFrequency() == $b->getTotalFrequency())
+		{
 			return 0;
 		}
 
@@ -67,7 +72,8 @@ class DataManager
 	}
 
 	//This function creates a cloud based on a key word
-	public function getCloudByKeyWord($keyWord, $limit){
+	public function getCloudByKeyWord($keyWord, $limit)
+	{
 		$this->clearPapers();
 
 		//sets array of papers using info from API
@@ -87,7 +93,8 @@ class DataManager
 	}
 
 	//This function creates a cloud based on an author
-	public function getCloudByAuthor($author, $limit)  {
+	public function getCloudByAuthor($author, $limit)
+	{
 		$this->clearPapers();
 
 		//sets array of papers using API
@@ -126,7 +133,8 @@ class DataManager
 	}
 
 	//Generates the word cloud with the current array of word objects
-	public function createWordCloud(){
+	public function createWordCloud()
+	{
 		$this->createPaperMap();
 		$this->createWordObjects();
 
@@ -138,10 +146,12 @@ class DataManager
 		$cloudArray = array_slice($cloudArray, 0, 250);
 
 		//make cloud
-		$this->cloud = new Cloud($cloudArray, $this->paperIdMap);
+		$this->cloud = new Cloud($cloudArray, $this->paperIdMap, $this->cloudCounter);
 
         //maps cloud ID to cloud objects
         $this->cloudMap[$this->cloud->getId()] = $this->cloud;
+
+		$this->cloudCounter += 1;
 
 		return $this->cloud;
 	}
@@ -169,6 +179,11 @@ class DataManager
 		$this->papers = $newPapers;
 
 		return $this->createWordCloud();
+	}
+
+	public function getCloud($id)
+	{
+		return $this->cloudMap[$id];
 	}
 
 }
