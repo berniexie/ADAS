@@ -39,6 +39,7 @@ class DataManager
 	//This function is to count the frequency of the words in the papers and create the word objects
 	public function createWordObjects()
 	{
+		$this->words = array();
 		//searches through each paper
 		foreach($this->papers as $paper)
 		{
@@ -183,7 +184,6 @@ class DataManager
 
 	public function getCloud($id)
 	{
-		print_r($this->cloudMap);
 		return $this->cloudMap[$id];
 	}
 

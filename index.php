@@ -13,6 +13,7 @@ session_start();
 $app = new \Slim\Slim();
 
 $app->get('/', function () use ($app, $twig) {	
+	$_SESSION['dataManager'] = new DataManager();
 	$template = $twig->loadTemplate('home.phtml');
 	$_SESSION['history'] = [];
 	$_SESSION['history']["History"] = -1;
@@ -25,7 +26,6 @@ $app->get('/cloud/', function () use ($app, $twig) {
 	$search = $app->request()->params('search');
 	$type = $app->request()->params('type');
 	$limit = $app->request()->params('limit');
-	$_SESSION['dataManager'] = new DataManager();
 	if ($type == 'author') {
 		$_SESSION['cloud'] = $_SESSION['dataManager']->getCloudByAuthor($search, $limit);
 	} else if ($type = 'keyword') {
@@ -136,9 +136,7 @@ $app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) 
 $app->get('/history', function () use ($app, $twig) {
 	$cloudid = $app->request()->params('cloudid');
 	$_SESSION['cloud'] = $_SESSION['dataManager']->getCloud($cloudid);
-	echo $_SESSION['cloud']->getId();
 	$wordArray = json_encode($_SESSION['cloud']->getWordArray());
-	// print_r($wordArray);
 	$template = $twig->loadTemplate('wordCloud.phtml');
 	$params = array(
 		'title' => "Another Day Another Scholar",
