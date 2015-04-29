@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/../src/ResearchPaperAPI.php';
-class paperTest extends PHPUnit_Framework_TestCase {
+class ResearchPaperAPITest extends PHPUnit_Framework_TestCase {
   protected $api;
   public function setUp() {
     $this->api = new ResearchPaperAPI();
