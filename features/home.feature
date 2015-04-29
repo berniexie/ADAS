@@ -45,7 +45,7 @@ Scenario: Search with author 'Smith'
 	When I choose "author" from the radio buttons
 	And I fill in "search" with "Smith"
 	And I click the Submit button
-	Then I should see "application"
+	Then I should see "polarization"
 
 Scenario: Check for Paper List
 	Given I am on the homepage
@@ -67,6 +67,7 @@ Scenario: Check for history
 	Given I am on the homepage
 	And I fill in "search" with "artificial intelligence"
 	And I click the Submit button
-	And I fill in search with "deep"
+	And I fill in "search" with "deep"
+	And I click the Submit button
 	And I choose "artificial intelligence" as the history value
 	Then I should see "artificial intelligence"

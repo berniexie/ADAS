@@ -44,6 +44,7 @@ class Cloud
 
 	function getId() {
 		return $this->id;
+
 	}
          
 }

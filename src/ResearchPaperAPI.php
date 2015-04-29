@@ -47,7 +47,7 @@ class ResearchPaperAPI
     public function getPapersByJournal($journal, $limit = 10)
     {
         $qJournal = preg_replace('/\s+/', "%20", $journal);
-        $queryString = "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?querytext=" . $qJournal . "&hc=" . $limit;
+        $queryString = "http://ieeexplore.ieee.org/gateway/ipsSearch.jsp?jn=" . $qJournal . "&hc=" . $limit;
         return $this->getPapersByQuery($queryString);
 
     }
@@ -59,6 +59,7 @@ class ResearchPaperAPI
         foreach ($xml->document as $d) {
             $title = $d->title;
             $authors = $d->authors;
+            if($authors[0] == "") continue;
             $authors = explode(";", $authors);
             $journal = $d->pubtitle;
             $id = $d->publicationId;
