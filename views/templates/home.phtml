@@ -12,7 +12,7 @@
     {% block head %}
     {% endblock %}
     <style>
-    a {
+    a 
         text-decoration: none;
         color: #000000;
     }
@@ -62,11 +62,10 @@
               <input type=text id="tags" name="search" placeholder="Search away..." required>
               <input type="submit" class="buttons" value="Submit">
 							<div id="historyMenu">
-                History:
                 <select name="history" onChange="window.location.href=this.value">
-                  <option value="www.google.com">deep</option>
-                  <option value="www.google.com">artificial intelligence</option>
-                  <option value="www.google.com">Halfond</option>
+                  {% for term,id in history %}
+                    <option value="history?cloudid={{ id }}">{{ term }}</option> // need to default selected to last
+                  {% endfor %}
                 </select>
               </div>
               {% block search %}{% endblock %}
@@ -75,7 +74,7 @@
       </div>
     </div>
 <script type="text/javascript">
-      var searchTerm = document.querySelector('input[type="text"]');
+      var searchTerm = document.querySelector('input[type="text"]')
     searchTerm.oninvalid = function(e) {  
     e.target.setCustomValidity("");
     if (!e.target.validity.valid) { e.target.setCustomValidity("Please enter a valid keyword or author"); }
