@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/../src/Word.php';
-class paperTest extends PHPUnit_Framework_TestCase {
+class WordTest extends PHPUnit_Framework_TestCase {
   protected $word;
   public function setUp() {
     $this->word = new Word("test", "001", 10);
