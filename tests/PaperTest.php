@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__ . '/../src/Paper.php';
-class paperTest extends PHPUnit_Framework_TestCase {
+class PaperTest extends PHPUnit_Framework_TestCase {
   protected $paper;
   public function setUp() {
     //Paper must be initialized in this format
