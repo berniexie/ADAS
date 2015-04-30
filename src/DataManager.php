@@ -17,7 +17,6 @@ class DataManager
 	public function __construct()
 	{
 		$this->apiManager = new ResearchPaperAPI();
-
 		$this->cloudCounter = 0;
 	}
 
@@ -40,6 +39,7 @@ class DataManager
 	//This function is to count the frequency of the words in the papers and create the word objects
 	public function createWordObjects()
 	{
+		$this->words = array();
 		//searches through each paper
 		foreach($this->papers as $paper)
 		{
@@ -146,6 +146,7 @@ class DataManager
 		$cloudArray = array_slice($cloudArray, 0, 250);
 
 		//make cloud
+
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap, $this->cloudCounter);
 
         //maps cloud ID to cloud objects

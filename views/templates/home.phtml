@@ -14,7 +14,7 @@
     {% block head %}
     {% endblock %}
     <style>
-    a {
+    a 
         text-decoration: none;
         color: #000000;
     }
@@ -28,41 +28,6 @@
     }
     #city { width: 25em; }
     </style>
-    <script>
-  //   $(function() {
-  //   function log( message ) {
-  //     $( "<div>" ).text( message ).prependTo( "#log" );
-  //     $( "#log" ).scrollTop( 0 );
-  //   }
- 
-  //   $( "#tags" ).autocomplete({
-  //     source: function( request, response ) {
-  //       $.ajax({
-  //         url: "/auto",
-  //         dataType: "jsonp",
-  //         data: {
-  //           q: request.term
-  //         },
-  //         success: function( data ) {
-  //           response( data );
-  //         }
-  //       });
-  //     },
-  //     minLength: 3,
-  //     select: function( event, ui ) {
-  //       log( ui.item ?
-  //         "Selected: " + ui.item.label :
-  //         "Nothing selected, input was " + this.value);
-  //     },
-  //     open: function() {
-  //       $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-  //     },
-  //     close: function() {
-  //       $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-  //     }
-  //   });
-  // });
-   </script>  
 </head>
 
 <body bgcolor= white>
@@ -87,14 +52,21 @@
               </div>
               <input type=text id="tags" name="search" placeholder="Search away..." required>
               <input type="submit" class="buttons" value="Submit">
-              <button type="button" class="buttons" id="printWordCloud">Print Word Cloud</button
+              <button type="button" class="buttons" id="printWordCloud">Print Word Cloud</button>
+							<div id="historyMenu">
+                <select name="history" onChange="window.location.href=this.value">
+                  {% for term,id in history %}
+                    <option value="history?cloudid={{ id }}">{{ term }}</option> // need to default selected to last
+                  {% endfor %}
+                </select>
+              </div>
               {% block search %}{% endblock %}
           </form>
           {% block addartist %}{% endblock %}
       </div>
     </div>
 <script type="text/javascript">
-      var searchTerm = document.querySelector('input[type="text"]');
+      var searchTerm = document.querySelector('input[type="text"]')
     searchTerm.oninvalid = function(e) {  
     e.target.setCustomValidity("");
     if (!e.target.validity.valid) { e.target.setCustomValidity("Please enter a valid keyword or author"); }
