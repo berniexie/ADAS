@@ -27,12 +27,14 @@
                 <form method='get' action='previous.html'>
                     <input type="submit" class="buttons" value="Back" onClick="history.back();return false;" style="width: 8%">
                 </form>
+                {% if buttons %}
                 <form id = "export" method='get'>
                     <input type="button" onclick= "exportFunc()" value="Export to PDF">
                 </form>
                 <form id = "subset" method='get'>
                     <input type="button" onclick = "ssCloud()" value="Subset Feature">
                 </form>
+                {% endif %}
             </div>
         </div>
         <div id = "paperTitles">

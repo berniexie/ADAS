@@ -47,8 +47,10 @@ $app->get('/cloud/', function () use ($app, $twig) {
 $app->get('/papers/', function () use ($app, $twig) {
 	$template = $twig->loadTemplate('paperList.phtml');
 	$term = $app->request()->params('term');
+	$showButtons = true;
 	if ($term[0] == "'") {
 		$papers = $_SESSION['dataManager']->getPapersByJournal($term);
+		$showButtons = false;
 		foreach($papers as $paper) {
 			$journal[] = array(
 			'title' => $paper->getParsedTitle(),
@@ -77,7 +79,8 @@ $app->get('/papers/', function () use ($app, $twig) {
 	$params = array(
 			'title' => "Another Day Another Scholar", 
 			'searchword' => $term,
-			'papers' => $papers
+			'papers' => $papers,
+			'buttons' => $showButtons
 			);
 
 	$template->display($params);
