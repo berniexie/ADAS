@@ -49,16 +49,4 @@ window.onload() = function() {
       window.location.href = "http://localhost:3000/sscloud/" + keyWord + "/" + ttlnums;
     }
   }
-<<<<<<< HEAD
-=======
-  var keyWord = document.getElementById('paperHeader').getElementsByTagName('h2')[0].innerHTML;
-  keyWord = keyWord.substring(1, keyWord.length-1);
-  if(cbnums.length != 0){
-    //If boxes are checked, send indexes of the checked boxes
-    window.location.href = "http://localhost:3000/sscloud/" + keyWord + "/" + cbnums;
-  } else {
-    //If none of the boxes are checked, send indexes of all boxes
-    window.location.href = "http://localhost:3000/sscloud/" + keyWord + "/" + ttlnums;
-  }
->>>>>>> master
 }
