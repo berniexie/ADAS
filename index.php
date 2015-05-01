@@ -113,14 +113,16 @@ $app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) 
 	$checked = explode(",", $subset);
 	$wordObject = $_SESSION['cloud']->getWordObject($term);
 	$ids = $wordObject->getTermFrequency();
-	$paperIds;
+	$paperIds = array();
 	$counter = 2;
-	foreach($ids as $id) {
+	foreach($ids as $id => $freq) {
 		if(in_array(strval($counter), $checked)) {
- 			$paperIds[] = $id;	
+ 			$paperIds[] = $id;
+			echo $id;	
  		}
  		$counter += 1;
 	}
+
 	$_SESSION['cloud'] = $_SESSION['dataManager']->getSubsetCloud($paperIds);
 
 	$wordArray = json_encode($_SESSION['cloud']->getWordArray());

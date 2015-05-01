@@ -6,12 +6,12 @@ include_once('ResearchPaperAPI.php');
 
 class DataManager 
 {
-	private $words = array();	    //array of Word objects that will be passed back to the cloud
-	private $papers = array();      //array of Paper objects used
+	private $words = array();		//array of Word objects that will be passed back to the cloud
+	private $papers = array();		//array of Paper objects used
 	private $cloud;
 	private $apiManager;
-	private $paperIdMap = array();  //maps paperID (string) to paper objects
-    private $cloudMap = array();    //maps cloudID to cloud objects
+	private $paperIdMap = array();	//maps paperID (string) to paper objects
+    private $cloudMap = array();	//maps cloudID to cloud objects
 	private $cloudCounter;			//int used to give ids to clouds
 
 	public function __construct()
@@ -40,6 +40,7 @@ class DataManager
 	public function createWordObjects()
 	{
 		$this->words = array();
+
 		//searches through each paper
 		foreach($this->papers as $paper)
 		{
@@ -119,6 +120,7 @@ class DataManager
 
 		//sets array of papers using API
 		$journalPapers = $this->apiManager->getPapersByJournal($journal);
+
 		//set parsedTitle in all of the papers
 		foreach($journalPapers as $paper)
 		{
@@ -146,11 +148,10 @@ class DataManager
 		$cloudArray = array_slice($cloudArray, 0, 250);
 
 		//make cloud
-
 		$this->cloud = new Cloud($cloudArray, $this->paperIdMap, $this->cloudCounter);
 
-        //maps cloud ID to cloud objects
-        $this->cloudMap[$this->cloud->getId()] = $this->cloud;
+		//maps cloud ID to cloud objects
+		$this->cloudMap[$this->cloud->getId()] = $this->cloud;
 
 		$this->cloudCounter += 1;
 
@@ -158,11 +159,13 @@ class DataManager
 	}
 
 	//Creates paper map
-	public function createPaperMap(){
+	public function createPaperMap()
+	{
 		//Each time a new paper map is created; it is for a new cloud and should be reset
 		$this->paperIdMap = null;
 
-		foreach($this->papers as $object){
+		foreach($this->papers as $object)
+		{
 			$this->paperIdMap[$object->getId()] = $object; //key = ID, value = paper object
 		}
 	}
@@ -178,6 +181,16 @@ class DataManager
 		}
 
 		$this->papers = $newPapers;
+
+		//set parsedTitle in all of the papers
+		foreach($this->papers as $paper)
+		{
+			$title = $paper->getTitle();
+
+			$parsedTitle = explode(" ", $title);
+
+			$paper->setParsedTitle($parsedTitle);
+		}
 
 		return $this->createWordCloud();
 	}
