@@ -90,7 +90,7 @@ $app->get('/pdf/:term/:subset', function ($term, $subset) use ($app, $twig) {
 	$subset = substr($subset, 0, -1);
 	$checked = explode(",", $subset);
 	$file = '<html><body>'.'<h1> "'.$term.'"</h1>';
-	$counter = 2;
+	$counter = 3;
  	foreach($ids as $id => $freq) {
  		if(in_array(strval($counter), $checked)) {
  			$paper = $_SESSION['cloud']->getPaperObject($id);
@@ -114,7 +114,7 @@ $app->get('/sscloud/:term/:subset', function ($term, $subset) use ($app, $twig) 
 	$wordObject = $_SESSION['cloud']->getWordObject($term);
 	$ids = $wordObject->getTermFrequency();
 	$paperIds = array();
-	$counter = 2;
+	$counter = 3;
 	foreach($ids as $id => $freq) {
 		if(in_array(strval($counter), $checked)) {
  			$paperIds[] = $id;
