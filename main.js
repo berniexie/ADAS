@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 window.onload() = function() {
   function exportFunc() {
     var inputs = document.getElementsByTagName("input");
