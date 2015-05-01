@@ -8,7 +8,7 @@ window.onload = function() {
         //window.location.href = image.src;
         var link = document.createElement('a');
         link.href = image.src;
-        link.download = 'word_cloud.jpg';
+        link.download = 'word_cloud.png';
         document.body.appendChild(link);
         link.click();
       }
